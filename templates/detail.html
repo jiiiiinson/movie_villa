@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+<div class="row">
+    <div class="col-md-6">
+    <br>
+    <img src="{{ movie.poster.url }}" style="width: 200px; height: 300px; object-fit: cover;">
+    </div>
+    <div class="col-md-6">
+        <br>
+        <h4>{{ movie.name }}</h4>
+        <h6>({{ movie.year }})</h6>
+        <h6>{{ movie.category }}</h6>
+        <h6>{{ movie.description }}</h6>
+        <h6>Actors: {{ movie.actors}}</h6>
+        <h6><a href="{{ movie.trailer_link}}}">{{ movie.trailer_link}}}</a></h6>
+        <a class="btn btn-warning" href="{% url 'update' movie.id %}">Update</a>
+        <a class="btn btn-danger" href="{% url 'delete' movie.id %}">Delete</a>
+        <a class="btn btn-success" href="{% url 'review' movie.id %}">Review</a>
+    </div>
+    <div class="col-md-6">
+        <br>
+        <h3>Reviews</h3>
+        <br>
+        {% for review in reviews %}
+        <div class="review">
+            <h5>{{ review.user }}</h5>
+            <p>{{ review.review }}</p>
+             <p>Rating: {{ review.rating }}/10</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}
